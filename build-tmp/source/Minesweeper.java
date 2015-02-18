@@ -17,8 +17,6 @@ import java.io.IOException;
 public class Minesweeper extends PApplet {
 
 
-
-
 public final static int NUM_COLS=20;
 public final static int BOMB_NUM = 50;
 public final static int NUM_ROWS=20;

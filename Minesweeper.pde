@@ -1,5 +1,3 @@
-
-
 import de.bezier.guido.*;
 public final static int NUM_COLS=20;
 public final static int BOMB_NUM = 50;
@@ -96,8 +94,6 @@ public void displayWinningMessage()
     buttons[6][12].setLabel("N");
     buttons[6][13].setLabel("!");
     stop();
-    
-
 }
 
 public class MSButton
