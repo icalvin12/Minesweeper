@@ -30,7 +30,6 @@ public void setBombs()
     {
     int tempRow = (int)(Math.random()*20);
     int tempCol = (int)(Math.random()*20);
-    println(tempRow + "," + tempCol);
     if(!bombs.contains(buttons[tempRow][tempCol]))
     {
         bombs.add(buttons[tempRow][tempCol]);
@@ -146,7 +145,6 @@ public class MSButton
         else if(countBombs(r,c)>0)
         {
             label = label + countBombs(r,c);
-            println("label");
         }
         else
         {
@@ -195,7 +193,6 @@ public class MSButton
     {
         if((r>-1 && r<20)&& (c>-1 && c<20))
         {
-            println(r +","+c+"true");
             return true;
         }
         println(r +","+c+"false");
