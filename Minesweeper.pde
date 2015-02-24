@@ -2,6 +2,7 @@ import de.bezier.guido.*;
 public final static int NUM_COLS=20;
 public final static int BOMB_NUM=50;
 public final static int NUM_ROWS=20;
+public boolean gameOver;
 public int numMarked;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton> (); //ArrayList of just the minesweeper buttons that are mined
@@ -98,6 +99,7 @@ public void displayWinningMessage()
     buttons[6][11].setLabel("I");
     buttons[6][12].setLabel("N");
     buttons[6][13].setLabel("!");
+    gameOver=true;
     stop();
 }
 
@@ -169,7 +171,7 @@ public class MSButton
         }
         }
         }
-        if(mouseButton==RIGHT)
+        if(mouseButton==RIGHT && gameOver==false)
         {
             marked=!marked;
         }

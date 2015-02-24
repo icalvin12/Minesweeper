@@ -20,6 +20,7 @@ public class Minesweeper extends PApplet {
 public final static int NUM_COLS=20;
 public final static int BOMB_NUM=50;
 public final static int NUM_ROWS=20;
+public boolean gameOver;
 public int numMarked;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton> (); //ArrayList of just the minesweeper buttons that are mined
@@ -49,7 +50,6 @@ public void setBombs()
     {
     int tempRow = (int)(Math.random()*20);
     int tempCol = (int)(Math.random()*20);
-    println(tempRow + "," + tempCol);
     if(!bombs.contains(buttons[tempRow][tempCol]))
     {
         bombs.add(buttons[tempRow][tempCol]);
@@ -117,6 +117,7 @@ public void displayWinningMessage()
     buttons[6][11].setLabel("I");
     buttons[6][12].setLabel("N");
     buttons[6][13].setLabel("!");
+    gameOver=true;
     stop();
 }
 
@@ -169,7 +170,6 @@ public class MSButton
         else if(countBombs(r,c)>0)
         {
             label = label + countBombs(r,c);
-            println("label");
         }
         else
         {
@@ -189,7 +189,7 @@ public class MSButton
         }
         }
         }
-        if(mouseButton==RIGHT)
+        if(mouseButton==RIGHT && gameOver==false)
         {
             marked=!marked;
         }
@@ -218,10 +218,8 @@ public class MSButton
     {
         if((r>-1 && r<20)&& (c>-1 && c<20))
         {
-            println(r +","+c+"true");
             return true;
         }
-        println(r +","+c+"false");
         return false;            
     }
     public int countBombs(int row, int col)
