@@ -1,7 +1,8 @@
 import de.bezier.guido.*;
 public final static int NUM_COLS=20;
-public final static int BOMB_NUM = 50;
+public final static int BOMB_NUM=50;
 public final static int NUM_ROWS=20;
+public int numMarked;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton> (); //ArrayList of just the minesweeper buttons that are mined
 
@@ -30,7 +31,6 @@ public void setBombs()
     {
     int tempRow = (int)(Math.random()*20);
     int tempCol = (int)(Math.random()*20);
-    println(tempRow + "," + tempCol);
     if(!bombs.contains(buttons[tempRow][tempCol]))
     {
         bombs.add(buttons[tempRow][tempCol]);
@@ -43,6 +43,7 @@ public void draw ()
     background( 0 );
     if(isWon())
         displayWinningMessage();
+    
 }
 public boolean isWon()
 {
@@ -69,9 +70,13 @@ public boolean isWon()
 }
 public void displayLosingMessage()
 {
-    for(int i=0;i<bombs.size();i++)
+    for(int i =0;i<NUM_ROWS;i++)
     {
-        bombs.get(i).setClicked(true);
+        for(int j=0;j<NUM_COLS;j++)
+        {
+            buttons[i][j].mousePressed();
+            buttons[i][j].setClicked(true);
+        }
     }
     buttons[6][6].setLabel("Y");
     buttons[6][7].setLabel("O");
@@ -81,7 +86,7 @@ public void displayLosingMessage()
     buttons[6][11].setLabel("O");
     buttons[6][12].setLabel("S");
     buttons[6][13].setLabel("E");
-    //stop();
+    stop();
 }
 public void displayWinningMessage()
 {
@@ -93,7 +98,7 @@ public void displayWinningMessage()
     buttons[6][11].setLabel("I");
     buttons[6][12].setLabel("N");
     buttons[6][13].setLabel("!");
-    //stop();
+    stop();
 }
 
 public class MSButton
@@ -137,7 +142,6 @@ public class MSButton
         clicked = true;
         if(keyPressed==true)
         {
-            marked = !marked;
         }
         else if(bombs.contains(this))
         {
@@ -146,7 +150,6 @@ public class MSButton
         else if(countBombs(r,c)>0)
         {
             label = label + countBombs(r,c);
-            println("label");
         }
         else
         {
@@ -195,10 +198,8 @@ public class MSButton
     {
         if((r>-1 && r<20)&& (c>-1 && c<20))
         {
-            println(r +","+c+"true");
             return true;
         }
-        println(r +","+c+"false");
         return false;            
     }
     public int countBombs(int row, int col)

@@ -18,8 +18,9 @@ public class Minesweeper extends PApplet {
 
 
 public final static int NUM_COLS=20;
-public final static int BOMB_NUM = 50;
+public final static int BOMB_NUM=50;
 public final static int NUM_ROWS=20;
+public int numMarked;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton> (); //ArrayList of just the minesweeper buttons that are mined
 
@@ -61,6 +62,7 @@ public void draw ()
     background( 0 );
     if(isWon())
         displayWinningMessage();
+    
 }
 public boolean isWon()
 {
@@ -87,9 +89,13 @@ public boolean isWon()
 }
 public void displayLosingMessage()
 {
-    for(int i=0;i<bombs.size();i++)
+    for(int i =0;i<NUM_ROWS;i++)
     {
-        bombs.get(i).setClicked(true);
+        for(int j=0;j<NUM_COLS;j++)
+        {
+            buttons[i][j].mousePressed();
+            buttons[i][j].setClicked(true);
+        }
     }
     buttons[6][6].setLabel("Y");
     buttons[6][7].setLabel("O");
@@ -112,8 +118,6 @@ public void displayWinningMessage()
     buttons[6][12].setLabel("N");
     buttons[6][13].setLabel("!");
     stop();
-    
-
 }
 
 public class MSButton
@@ -157,7 +161,6 @@ public class MSButton
         clicked = true;
         if(keyPressed==true)
         {
-            marked = !marked;
         }
         else if(bombs.contains(this))
         {
