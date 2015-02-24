@@ -195,7 +195,6 @@ public class MSButton
         {
             return true;
         }
-        println(r +","+c+"false");
         return false;            
     }
     public int countBombs(int row, int col)
